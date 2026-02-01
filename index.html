@@ -1,157 +1,82 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>💘 Ma Valentine 💘</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            font-family: 'Segoe UI', sans-serif;
-        }
+<meta charset="UTF-8">
+<title>VOTRE MERCON</title>
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        background: orange;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        font-family: Impact, Arial Black, sans-serif;
+    }
 
-        body {
-            margin: 0;
-            height: 100vh;
-            background: linear-gradient(135deg, #ff758c, #ff7eb3);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
+    .container {
+        text-align: center;
+        position: relative;
+    }
 
-        .card {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            width: 90%;
-            max-width: 400px;
-            position: relative;
-        }
+    h1 {
+        font-size: 12vw;
+        color: white;
+        text-shadow: 
+            0 0 20px orange,
+            0 0 40px white;
+        animation: shake 0.6s infinite, pulse 1.2s infinite;
+    }
 
-        h1 {
-            color: #ff4d6d;
-            margin-bottom: 10px;
-        }
+    @keyframes shake {
+        0% { transform: translate(0); }
+        25% { transform: translate(5px, -5px); }
+        50% { transform: translate(-5px, 5px); }
+        75% { transform: translate(5px, 5px); }
+        100% { transform: translate(0); }
+    }
 
-        p {
-            color: #555;
-            margin-bottom: 30px;
-        }
+    @keyframes pulse {
+        0%,100% { transform: scale(1); }
+        50% { transform: scale(1.08); }
+    }
 
-        .buttons {
-            position: relative;
-            height: 120px;
-        }
+    .eagle {
+        position: absolute;
+        width: 120px;
+        animation: fly 6s linear infinite;
+        filter: drop-shadow(0 0 10px white);
+    }
 
-        button {
-            padding: 15px 30px;
-            font-size: 18px;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: 0.3s;
-            position: absolute;
-        }
+    .eagle:nth-child(2) { top: 10%; animation-delay: 0s; }
+    .eagle:nth-child(3) { top: 40%; animation-delay: 2s; }
+    .eagle:nth-child(4) { top: 70%; animation-delay: 4s; }
 
-        #yesBtn {
-            background: #ff4d6d;
-            color: white;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        #yesBtn:hover {
-            transform: translateX(-50%) scale(1.1);
-            box-shadow: 0 10px 20px rgba(255,77,109,0.5);
-        }
-
-        #noBtn {
-            background: #ddd;
-            color: #555;
-            right: 20px;
-        }
-
-        /* Animation cœurs */
-        .heart {
-            position: fixed;
-            bottom: -20px;
-            font-size: 24px;
-            animation: floatUp 4s linear infinite;
-        }
-
-        @keyframes floatUp {
-            0% {
-                transform: translateY(0) scale(1);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100vh) scale(1.5);
-                opacity: 0;
-            }
-        }
-
-        .success {
-            animation: pop 0.6s ease;
-        }
-
-        @keyframes pop {
-            0% { transform: scale(0.8); }
-            100% { transform: scale(1); }
-        }
-    </style>
+    @keyframes fly {
+        from { left: -150px; }
+        to { left: 110%; }
+    }
+</style>
 </head>
 <body>
 
-<div class="card" id="card">
-    <h1>💘 Djany 💘</h1>
-    <p>Veux-tu être ma Valentine ?</p>
+<div class="container">
+    <h1>VOTRE MERCON</h1>
 
-    <div class="buttons">
-        <button id="yesBtn">💖 OUI 💖</button>
-        <button id="noBtn">❌ NON</button>
-    </div>
+    <!-- AIGLES -->
+    <svg class="eagle" viewBox="0 0 100 50" fill="white">
+        <path d="M5 25 Q50 -10 95 25 Q50 10 5 25 Z"/>
+    </svg>
+
+    <svg class="eagle" viewBox="0 0 100 50" fill="white">
+        <path d="M5 25 Q50 -10 95 25 Q50 10 5 25 Z"/>
+    </svg>
+
+    <svg class="eagle" viewBox="0 0 100 50" fill="white">
+        <path d="M5 25 Q50 -10 95 25 Q50 10 5 25 Z"/>
+    </svg>
 </div>
-
-<script>
-    const noBtn = document.getElementById("noBtn");
-    const yesBtn = document.getElementById("yesBtn");
-    const card = document.getElementById("card");
-
-    // Bouton NON qui fuit
-    noBtn.addEventListener("mouseover", () => {
-        const x = Math.random() * 250;
-        const y = Math.random() * 80;
-        noBtn.style.left = x + "px";
-        noBtn.style.top = y + "px";
-    });
-
-    // Bouton OUI
-    yesBtn.addEventListener("click", () => {
-        card.innerHTML = `
-            <h1 class="success">💞 OUIIIII 💞</h1>
-            <p>Tu viens de rendre quelqu’un incroyablement heureux 🥰</p>
-            <p>Je t’aime 💖</p>
-        `;
-
-        // Pluie de cœurs
-        setInterval(createHeart, 200);
-    });
-
-    function createHeart() {
-        const heart = document.createElement("div");
-        heart.classList.add("heart");
-        heart.innerText = "💖";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
-        document.body.appendChild(heart);
-
-        setTimeout(() => {
-            heart.remove();
-        }, 5000);
-    }
-</script>
 
 </body>
 </html>
